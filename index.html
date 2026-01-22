@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- this is a commment: you can change the title to anything you want but it is also fine to just leave it
+    -->
+    <title>template-title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jacksonkoh8/AR.js@99bda004452549e8a7576b9e7afc26992aa0104e/aframe/build/aframe-ar.js"></script>
+    <script src="gesture-detector.js"></script>
+    <script src="gesture-handler.js"></script>
+    <script src="sky.js"></script>
+
+    <!-- this is a comment: the alert below produces a pop up box when loaded to give information to users, 
+     you can edit the message in between the inverted commas or remove it entirely
+    -->
+    <script>
+      window.onload = function () {
+        alert("Android users experiencing extreme camera zoom should go to browser setting, accessibility/webpage view, turn off force enable zoom/pinch to zoom in/out of webpages\n\nClick on X on the top right hand to partially hide background");
+      };
+    </script>
+  </head>
+
+  <body> 
+  <div id="skybtn">
+    <button 
+    class="skybtn" 
+    id="skybtn"
+    onclick="skyCTRL()"
+    >X</button>
+  </div>
+    <a-scene
+      arjs="sourceWidth: 1024; sourceHeight: 776; displayWidth: 1024; displayHeight: 776;"
+      embedded
+      renderer="logarithmicDepthBuffer: true;"
+      vr-mode-ui="enabled: false"
+      gesture-detector
+      loading-screen="enabled: false"
+      gltf-model="dracoDecoderPath: https://www.gstatic.com/draco/v1/decoders/;"
+      id="scene"
+    >
+      <a-assets>
+        <!-- this is a commment: for "id", replace "template" with your exact model name (without file extension) make sure the -obj is immediately behind the model name, 
+          for "src" replace "template" with model name, make sure the .obj is immediately behind the model name,
+          make sure that the model file is placed in the same repository where this index.html file is located
+        -->
+        <a-asset-item
+          id="template-obj"
+          src="template.obj"
+        >
+        <!-- this is a commment: repeat the same for mtl file
+        -->
+        </a-asset-item>
+        <a-asset-item
+          id="template-mtl"
+          src="template.mtl"
+        >
+        </a-asset-item>
+      </a-assets>
+
+      <a-marker
+        preset="hiro"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;"
+        id="markerA"
+        smooth="true"
+        smoothCount="50"
+        smoothTolerance="0.1"
+        smoothThreshold="1000"
+      >
+        
+        <a-sky 
+          id=sky
+          color="#C0C0C0"
+          opacity="0"
+        >
+        </a-sky>        
+        
+      <!-- this is a commment: for "id", replace "template" with model name, make sure the "-model" is there immediately behind the model name
+        for "obj-model", replace "#template-obj" and "#template-mtl" with model name from a-asset-item above, make sure the # is there immediately in front of the model name and the -obj and -mtl are immediately behind the model name
+        you can leave position unchanged, but you can modify the x y z coordinates to adjust where your model appears above the Hiro Marker, if necessary,
+        you can leave rotation unchanged, but you can modify the x y z rotation to adjust the angle that your model appears above the Hiro Marker, if necessary,
+        you can leave scale unchanged, but you can modify the x y z scale to adjust the size of your model when it first loads, if necessary,
+        OBJ 3D models cannot have animation
+      -->
+        <a-entity
+          id="template-model"
+          obj-model="obj: #template-obj; mtl: #template-mtl"
+          position="0 0 0"
+          rotation="0 0 0"
+          scale="1 1 1"
+          class="clickable"
+          gesture-handler        
+        >
+        </a-entity>
+
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
