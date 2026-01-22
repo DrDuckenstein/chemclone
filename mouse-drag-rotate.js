@@ -1,38 +1,33 @@
-AFRAME.registerComponent("mouse-drag-rotate", {
-  schema: {
-    speed: { default: 1 }
-  },
-
+AFRAME.registerComponent("mouse-rotate", {
   init: function () {
-    this.ifMouseDown = false;
-    this.previousMousePosition = { x: 0, y: 0 };
+    const el = this.el;
+    const sceneEl = el.sceneEl;
 
-    this.el.addEventListener("mousedown", () => {
-      this.ifMouseDown = true;
-    });
+    sceneEl.addEventListener("render-target-loaded", () => {
+      const canvas = sceneEl.canvas;
 
-    window.addEventListener("mouseup", () => {
-      this.ifMouseDown = false;
-    });
+      let dragging = false;
+      let lastX = 0;
 
-    window.addEventListener("mousemove", (event) => {
-      if (!this.ifMouseDown) return;
+      canvas.addEventListener("mousedown", (e) => {
+        dragging = true;
+        lastX = e.clientX;
+      });
 
-      const deltaMove = {
-        x: event.movementX || event.clientX - this.previousMousePosition.x,
-        y: event.movementY || event.clientY - this.previousMousePosition.y
-      };
+      window.addEventListener("mouseup", () => {
+        dragging = false;
+      });
 
-      const rotation = this.el.getAttribute("rotation");
-      rotation.y += deltaMove.x * 0.5;
-      rotation.x += deltaMove.y * 0.5;
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
 
-      this.el.setAttribute("rotation", rotation);
+        const dx = e.clientX - lastX;
+        lastX = e.clientX;
 
-      this.previousMousePosition = {
-        x: event.clientX,
-        y: event.clientY
-      };
+        const rot = el.getAttribute("rotation");
+        rot.y += dx * 0.4;
+        el.setAttribute("rotation", rot);
+      });
     });
   }
 });
