@@ -47,18 +47,18 @@
           for "src" replace "template" with model name, make sure the .obj is immediately behind the model name,
           make sure that the model file is placed in the same repository where this index.html file is located
         -->
-        <a-asset-item
-          id="template-obj"
-          src="template.obj"
-        >
-        <!-- this is a commment: repeat the same for mtl file
-        -->
-        </a-asset-item>
-        <a-asset-item
-          id="template-mtl"
-          src="template.mtl"
+                <a-asset-item
+          id="benzene2-obj"
+          src="benzene2.obj"
         >
         </a-asset-item>
+        
+        <a-asset-item
+          id="benzene2-mtl"
+          src="benzene2.mtl"
+        >
+        </a-asset-item>
+
       </a-assets>
 
       <a-marker
@@ -87,16 +87,17 @@
         you can leave scale unchanged, but you can modify the x y z scale to adjust the size of your model when it first loads, if necessary,
         OBJ 3D models cannot have animation
       -->
-        <a-entity
-          id="template-model"
-          obj-model="obj: #template-obj; mtl: #template-mtl"
-          position="0 0 0"
-          rotation="0 0 0"
-          scale="1 1 1"
-          class="clickable"
-          gesture-handler        
-        >
-        </a-entity>
+              <a-entity
+        id="benzene2-model"
+        obj-model="obj: #benzene2-obj; mtl: #benzene2-mtl"
+        position="0 0 0"
+        rotation="0 0 0"
+        scale="1 1 1"
+        class="clickable"
+        gesture-handler        
+      >
+      </a-entity>
+
 
       </a-marker>
       <a-entity camera></a-entity>
