@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="pointer-rotate.js"></script>
+    <script src="free-rotate.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/jacksonkoh8/AR.js@99bda004452549e8a7576b9e7afc26992aa0104e/aframe/build/aframe-ar.js"></script>
     <script src="gesture-detector.js"></script>
     <script src="gesture-handler.js"></script>
@@ -65,20 +65,9 @@
 
 
 
-      <a-marker
-  preset="hiro"
-  id="markerA"
-  smooth="true"
->
+<a-marker preset="hiro" id="markerA" smooth="true">
+  <a-entity id="rotator" free-rotate>
 
-          <a-sky 
-          id=sky
-          color="#C0C0C0"
-          opacity="0"
-        >
-        </a-sky>
-  <a-entity id="rotator" unified-rotate>
-    
     <a-entity
       id="benzene2-model"
       obj-model="obj: #benzene2-obj; mtl: #benzene2-mtl"
@@ -90,6 +79,7 @@
 
   </a-entity>
 </a-marker>
+
 
     </a-scene>
   </body>
